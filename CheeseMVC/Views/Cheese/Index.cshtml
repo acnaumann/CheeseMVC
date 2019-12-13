@@ -16,10 +16,10 @@
  
 
 <ul>
-    @foreach(string cheese in ViewBag.cheeses)
+    @foreach(KeyValuePair<string, string> cheese in ViewBag.cheeses)
     {
         <li>
-            @cheese
+            @cheese.Key : @cheese.Value
         </li>
     }
   
