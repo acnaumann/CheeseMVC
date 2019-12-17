@@ -28,6 +28,31 @@ namespace CheeseMVC.Controllers
             return View();
         }
 
+        
+        public IActionResult Delete()
+
+        {
+            ViewBag.cheeses = Cheeses;
+            return View();
+        }
+
+
+        [HttpPost]
+        [Route("/Cheese/Delete")]
+        public IActionResult RemoveCheese(string cheese)
+        {
+            //Remove selected cheeses from existing choices
+            if (cheese == "select")
+            {
+                return Redirect("cheese");
+            }
+            else
+            { 
+                Cheeses.Remove(cheese);
+                return Redirect("/Cheese");
+            }
+        }
+
         [HttpPost]
         [Route("/Cheese/Add")]
         public IActionResult NewCheese(string name, string description)

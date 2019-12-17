@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<h1>Remove Cheese</h1>
+<p>Select which cheese(s) you would like to remove:</p>
+<form method="post">
+        <p> cheese
+            <select name="cheese">
+                <option value="select">Select a cheese to remove</option>
+                @foreach (KeyValuePair <string, string> cheese in ViewBag.cheeses)
+                {
+                    <option value="@cheese.Key" >@cheese.Key</option>
+                }  
+            </select>
+        </p>
+
+    <input type="submit" value="Remove"/>
+</form>
+

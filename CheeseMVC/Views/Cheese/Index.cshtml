@@ -8,6 +8,7 @@
 <h1>My Cheese</h1>
 
 <p><a asp-controller="Cheese" asp-action="Add">Add Cheese</a></p>
+<p><a asp-controller="Cheese" asp-action="Delete">Remove Cheese</a></p>
 
 @if (ViewBag.cheeses.Count == 0)
 {
@@ -21,6 +22,7 @@
         <li>
             @cheese.Key : @cheese.Value
         </li>
+       
     }
   
 </ul>
