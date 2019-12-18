@@ -9,9 +9,9 @@
         <p> cheese
             <select name="cheese">
                 <option value="select">Select a cheese to remove</option>
-                @foreach (KeyValuePair <string, string> cheese in ViewBag.cheeses)
+                @foreach (Cheese cheese in ViewBag.cheeses)
                 {
-                    <option value="@cheese.Key" >@cheese.Key</option>
+                    <option value="@cheese.Name" >@cheese.Name</option>
                 }  
             </select>
         </p>
