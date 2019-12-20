@@ -16,12 +16,17 @@
 }
  
 
-<ul>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
     @foreach(Cheese cheese in ViewBag.cheeses)
     {
-        <li>
-            @cheese.Name : @cheese.Description
-        </li>   
+        <tr>
+            <td>@cheese.Name</td>
+            <td>@cheese.Description</td>     
+        </tr>
     }
   
-</ul>
+</table>

@@ -6,11 +6,17 @@ namespace CheeseMVC.Models
 
         public string Name { get; set; }
         public string Description { get; set; }
+        public int CheeseId { get; set; }
+        private static int nextId = 1;
 
-        public Cheese(string name, string description)
+        
+
+
+        //add a default constructor - has no properties, no
+        public Cheese()
         {
-            Name = name;
-            Description = description;
+            CheeseId = nextId;
+            nextId++;
         }
         
     }

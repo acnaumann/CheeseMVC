@@ -12,13 +12,11 @@ namespace CheeseMVC.Controllers
     public class CheeseController : Controller
     {
 
-        private static List<Cheese> Cheeses = new List<Cheese>();
-
         // GET: /<controller>/
         public IActionResult Index()
         {
 
-            ViewBag.cheeses = Cheeses;
+            ViewBag.cheeses = CheeseData.GetAll();
 
             return View();
         }
@@ -33,40 +31,36 @@ namespace CheeseMVC.Controllers
         public IActionResult Delete()
 
         {
-            ViewBag.cheeses = Cheeses;
+            ViewBag.title = "Remove Cheeses";
+            ViewBag.cheeses = CheeseData.GetAll();
             return View();
         }
 
 
         [HttpPost]
         [Route("/Cheese/Delete")]
-        public IActionResult RemoveCheese(string cheese)
+        public IActionResult RemoveCheese(int[] cheeseIds)
         {
             //Remove selected cheeses from existing choices
 
             //Cheeses.RemoveAll(x => x.Name == cheese);
             //Cheeses.SingleOrDefault(x => x.Name == cheese);
-
-            foreach (Cheese cheeseObject in Cheeses)
+            foreach(int cheeseId in cheeseIds)
             {
-                if (cheeseObject.Name.Equals(cheese))
-                {
-                    Cheeses.Remove(cheeseObject);
-                    break;
-                }
+                CheeseData.Remove(cheeseId);
             }
 
-            return Redirect("/Cheese");
+            return Redirect("/");  //this was redirected to "/Cheese", but because we
+                //went into the startup.cs file and changed the controller to cheese
+                //instead of "/Home" we can redirect to index. 
         }
 
         [HttpPost]
         [Route("/Cheese/Add")]
-        public IActionResult NewCheese(string name, string description)
+        public IActionResult NewCheese(Cheese newCheese)
         {
-            //create new cheese object
-            Cheese ch = new Cheese(name, description);
             //Add the new cheese to the existing cheeses
-            Cheeses.Add(ch);
+            CheeseData.Add(newCheese);
 
             return Redirect("/Cheese");
         }

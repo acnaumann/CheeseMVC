@@ -1,20 +1,20 @@
-﻿@{
-    ViewData["Title"] = "Delete";
-}
+﻿
 
 
-<h1>Remove Cheese</h1>
+<h1>@ViewBag.title</h1>
 <p>Select which cheese(s) you would like to remove:</p>
 <form method="post">
-        <p> cheese
-            <select name="cheese">
-                <option value="select">Select a cheese to remove</option>
-                @foreach (Cheese cheese in ViewBag.cheeses)
-                {
-                    <option value="@cheese.Name" >@cheese.Name</option>
-                }  
-            </select>
-        </p>
+
+       
+    @foreach (Cheese cheese in ViewBag.cheeses)
+    {
+        <input type="checkbox" name="cheeseIds" id="@cheese.CheeseId" value="@cheese.CheeseId"/>
+        <label for="@cheese.CheeseId">@cheese.Name : @cheese.Description</label>
+        
+        <br />
+
+    }  
+        
 
     <input type="submit" value="Remove"/>
 </form>
