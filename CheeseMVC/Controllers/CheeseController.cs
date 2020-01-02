@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CheeseMVC.Models;
+using CheeseMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -16,15 +17,16 @@ namespace CheeseMVC.Controllers
         public IActionResult Index()
         {
 
-            ViewBag.cheeses = CheeseData.GetAll();
+            List<Cheese> cheeses = CheeseData.GetAll();
 
-            return View();
+            return View(cheeses);
         }
 
 
         public IActionResult Add()
         {
-            return View();
+            AddCheeseViewModel addCheeseViewModel = new AddCheeseViewModel();
+            return View(addCheeseViewModel);
         }
 
 
@@ -56,13 +58,24 @@ namespace CheeseMVC.Controllers
         }
 
         [HttpPost]
-        [Route("/Cheese/Add")]
-        public IActionResult NewCheese(Cheese newCheese)
+        public IActionResult Add(AddCheeseViewModel addCheeseViewModel)
         {
-            //Add the new cheese to the existing cheeses
-            CheeseData.Add(newCheese);
+            if (ModelState.IsValid)
+            {
+                //Add the new cheese to the existing cheeses
+                Cheese newCheese = new Cheese
+                {
+                    Name = addCheeseViewModel.Name,
+                    Description = addCheeseViewModel.Description
+                };
 
-            return Redirect("/Cheese");
+                CheeseData.Add(newCheese);
+
+                return Redirect("/Cheese");
+            }
+
+            return View(addCheeseViewModel);
+           
         }
 
         public IActionResult Edit(int cheeseId)

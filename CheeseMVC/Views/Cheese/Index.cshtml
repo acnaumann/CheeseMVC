@@ -1,16 +1,15 @@
 ﻿
-@{
-    ViewData["Title"] = "My Cheese";
-
-}
+@model List<CheeseMVC.Models.Cheese>
 
 
-<h1>My Cheese</h1>
+
+
+<h1>View</h1>
 
 <p><a asp-controller="Cheese" asp-action="Add">Add Cheese</a></p>
 <p><a asp-controller="Cheese" asp-action="Delete">Remove Cheese</a></p>
 
-@if (ViewBag.cheeses.Count == 0)
+@if (Model.Count == 0)
 {
     <p>No Cheeses Yet!</p>
 }
@@ -22,7 +21,7 @@
         <th>Description</th>
         <th>Edit</th>
     </tr>
-    @foreach(Cheese cheese in ViewBag.cheeses)
+    @foreach(Cheese cheese in Model)
     {
         <tr>
             <td>@cheese.Name</td>
