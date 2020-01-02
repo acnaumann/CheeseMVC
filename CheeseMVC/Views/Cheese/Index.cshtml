@@ -19,6 +19,7 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Type</th>
         <th>Edit</th>
     </tr>
     @foreach(Cheese cheese in Model)
@@ -26,6 +27,7 @@
         <tr>
             <td>@cheese.Name</td>
             <td>@cheese.Description</td>
+            <td>@cheese.Type</td>
             <td><a asp-controller="Cheese" asp-action="Edit" asp-route-cheeseId="@cheese.CheeseId">edit</a></td>
         </tr>
     }
