@@ -6,7 +6,7 @@
 <form method="post">
 
        
-    @foreach (Cheese cheese in ViewBag.cheeses)
+    @foreach (Cheese cheese in ViewBag.cheeses)  // var is used in place of Cheese in the video
     {
         <input type="checkbox" name="cheeseIds" id="@cheese.CheeseId" value="@cheese.CheeseId"/>
         <label for="@cheese.CheeseId">@cheese.Name : @cheese.Description</label>
@@ -18,4 +18,6 @@
 
     <input type="submit" value="Remove"/>
 </form>
+
+
 

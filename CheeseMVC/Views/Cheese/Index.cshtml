@@ -20,12 +20,14 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Edit</th>
     </tr>
     @foreach(Cheese cheese in ViewBag.cheeses)
     {
         <tr>
             <td>@cheese.Name</td>
-            <td>@cheese.Description</td>     
+            <td>@cheese.Description</td>
+            <td><a asp-controller="Cheese" asp-action="Edit" asp-route-cheeseId="@cheese.CheeseId">edit</a></td>
         </tr>
     }
   

@@ -27,7 +27,7 @@ namespace CheeseMVC.Controllers
             return View();
         }
 
-        
+
         public IActionResult Delete()
 
         {
@@ -45,14 +45,14 @@ namespace CheeseMVC.Controllers
 
             //Cheeses.RemoveAll(x => x.Name == cheese);
             //Cheeses.SingleOrDefault(x => x.Name == cheese);
-            foreach(int cheeseId in cheeseIds)
+            foreach (int cheeseId in cheeseIds)
             {
                 CheeseData.Remove(cheeseId);
             }
 
             return Redirect("/");  //this was redirected to "/Cheese", but because we
-                //went into the startup.cs file and changed the controller to cheese
-                //instead of "/Home" we can redirect to index. 
+                                   //went into the startup.cs file and changed the controller to cheese
+                                   //instead of "/Home" we can redirect to index. 
         }
 
         [HttpPost]
@@ -64,5 +64,23 @@ namespace CheeseMVC.Controllers
 
             return Redirect("/Cheese");
         }
+
+        public IActionResult Edit(int cheeseId)
+        {
+            ViewBag.cheese = CheeseData.GetById(cheeseId);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, string name, string description)
+        {
+            Cheese ch = CheeseData.GetById(id);
+            ch.Name = name;
+            ch.Description = description;
+            
+            return Redirect("/Cheese");
+            
+        }
+
     }
 }
