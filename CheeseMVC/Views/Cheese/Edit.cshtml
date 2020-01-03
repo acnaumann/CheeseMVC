@@ -3,7 +3,7 @@
 <h1>Edit Cheese @Model.Name (id = @Model.CheeseId)</h1>
 
 <form asp-controller="Cheese" asp-action="Edit" method="post" >
-    <input type="hidden" value="@Model.CheeseId" name="id" />
+    <input type="hidden" value="@Model.CheeseId" name="CheeseId" />
     <div class="form-group">
         <label asp-for="Name"></label>
         <input class="form-group"asp-for="Name"/>
@@ -18,6 +18,11 @@
         <label asp-for="Type"></label>
         <select asp-for="Type" asp-items="@Model.CheeseTypes"></select>
         <span asp-validation-for="Type"></span>
+    </div>
+   <div>
+        <label asp-for="Rating"></label> 
+        <input class="form-group" asp-for="Rating"/>
+        <span asp-validation-for="Rating"></span>
     </div>
 
     <input type="submit" value="Edit Cheese" />

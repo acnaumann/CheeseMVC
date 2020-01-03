@@ -20,6 +20,7 @@ namespace CheeseMVC.ViewModels
 
         public List<SelectListItem> CheeseTypes { get; set; }
 
+        [Range(1,5)]
         public int Rating { get; set; }
 
 
@@ -50,10 +51,17 @@ namespace CheeseMVC.ViewModels
             //How would you loop through a set of enums??
         }
 
-        //CreateCheese()
-        //{
-
-        //}
+        public Cheese CreateCheese()
+        {
+            return new Cheese
+            {
+                Name = this.Name,
+                Description = this.Description,
+                Type = this.Type,
+                Rating = this.Rating
+            };
+            
+        }
     }
 
 }

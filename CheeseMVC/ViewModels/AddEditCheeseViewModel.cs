@@ -26,6 +26,7 @@ namespace CheeseMVC.ViewModels
             Name = ch.Name;
             Description = ch.Description;
             Type = ch.Type;
+            Rating = ch.Rating;
         }
     }
 }

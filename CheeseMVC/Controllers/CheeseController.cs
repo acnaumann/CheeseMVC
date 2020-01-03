@@ -59,15 +59,7 @@ namespace CheeseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                //addCheeseViewModel.CreateCheese()
-                //Add the new cheese to the existing cheeses
-                Cheese newCheese = new Cheese
-                {
-                    Name = addCheeseViewModel.Name,
-                    Description = addCheeseViewModel.Description,
-                    Type = addCheeseViewModel.Type,
-                    Rating = addCheeseViewModel.Rating
-                };
+                Cheese newCheese = addCheeseViewModel.CreateCheese();
 
                 CheeseData.Add(newCheese);
 
@@ -82,6 +74,7 @@ namespace CheeseMVC.Controllers
         public IActionResult Edit(int cheeseId)
         {
             Cheese ch = CheeseData.GetById(cheeseId);
+            
 
             AddEditCheeseViewModel vm = new AddEditCheeseViewModel(ch);
 
@@ -91,12 +84,17 @@ namespace CheeseMVC.Controllers
 
         //POST /Cheese/Edit
         [HttpPost]
-        public IActionResult Edit(int id, string name, string description, CheeseType type)
+        public IActionResult Edit(AddEditCheeseViewModel vm)
         {
-            Cheese ch = CheeseData.GetById(id);
-            ch.Name = name;
-            ch.Description = description;
-            ch.Type = type;
+            if (ModelState.IsValid)
+            {
+                Cheese ch = CheeseData.GetById(vm.CheeseId);
+                ch.Name = vm.Name;
+                ch.Description = vm.Description;
+                ch.Type = vm.Type;
+                ch.Rating = vm.Rating;
+            }
+           
             
             return Redirect("/Cheese");
             
