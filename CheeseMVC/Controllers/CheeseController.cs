@@ -22,10 +22,6 @@ namespace CheeseMVC.Controllers
             return View(cheeses);
         }
 
-
-      
-
-
         public IActionResult Delete()
 
         {
@@ -33,7 +29,6 @@ namespace CheeseMVC.Controllers
             ViewBag.cheeses = CheeseData.GetAll();
             return View();
         }
-
 
         [HttpPost]
         [Route("/Cheese/Delete")]
@@ -53,7 +48,6 @@ namespace CheeseMVC.Controllers
                                    //instead of "/Home" we can redirect to index. 
         }
 
-
         public IActionResult Add()
         {
             AddCheeseViewModel addCheeseViewModel = new AddCheeseViewModel();
@@ -65,12 +59,14 @@ namespace CheeseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                //addCheeseViewModel.CreateCheese()
                 //Add the new cheese to the existing cheeses
                 Cheese newCheese = new Cheese
                 {
                     Name = addCheeseViewModel.Name,
                     Description = addCheeseViewModel.Description,
-                    Type = addCheeseViewModel.Type
+                    Type = addCheeseViewModel.Type,
+                    Rating = addCheeseViewModel.Rating
                 };
 
                 CheeseData.Add(newCheese);
@@ -82,18 +78,25 @@ namespace CheeseMVC.Controllers
            
         }
 
+        //GET /Cheese/Edit?cheeseId=#
         public IActionResult Edit(int cheeseId)
         {
-            ViewBag.cheese = CheeseData.GetById(cheeseId);
-            return View();
+            Cheese ch = CheeseData.GetById(cheeseId);
+
+            AddEditCheeseViewModel vm = new AddEditCheeseViewModel(ch);
+
+            return View(vm);
         }
 
+
+        //POST /Cheese/Edit
         [HttpPost]
-        public IActionResult Edit(int id, string name, string description)
+        public IActionResult Edit(int id, string name, string description, CheeseType type)
         {
             Cheese ch = CheeseData.GetById(id);
             ch.Name = name;
             ch.Description = description;
+            ch.Type = type;
             
             return Redirect("/Cheese");
             

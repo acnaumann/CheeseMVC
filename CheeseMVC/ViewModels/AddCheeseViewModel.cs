@@ -20,6 +20,8 @@ namespace CheeseMVC.ViewModels
 
         public List<SelectListItem> CheeseTypes { get; set; }
 
+        public int Rating { get; set; }
+
 
         public AddCheeseViewModel()
         {
@@ -45,9 +47,13 @@ namespace CheeseMVC.ViewModels
                 Text = CheeseType.Soft.ToString()
             });
 
-
-
             //How would you loop through a set of enums??
         }
+
+        //CreateCheese()
+        //{
+
+        //}
     }
+
 }

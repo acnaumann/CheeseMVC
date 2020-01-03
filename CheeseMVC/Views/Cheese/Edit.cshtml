@@ -1,16 +1,25 @@
-﻿
-@{
-    ViewData["Title"] = "Add";
-}
+﻿@model CheeseMVC.ViewModels.AddEditCheeseViewModel
 
-<h1>Edit Cheese @ViewBag.cheese.Name (id = @ViewBag.cheese.CheeseId)</h1>
+<h1>Edit Cheese @Model.Name (id = @Model.CheeseId)</h1>
 
-<form method="post" >
-    <input type="hidden" value="@ViewBag.cheese.CheeseId" name="id" />
-    <p>New name:
-    <input type="text" name="name" value="@ViewBag.cheese.Name"/></p>
-    <p>New description: 
-    <input type="text" name="description" value="@ViewBag.cheese.Description"/></p>
+<form asp-controller="Cheese" asp-action="Edit" method="post" >
+    <input type="hidden" value="@Model.CheeseId" name="id" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-group"asp-for="Name"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Description"></label> 
+        <input class="form-group" asp-for="Description"/>
+        <span asp-validation-for="Description"></span>
+    </div>
+    <div>
+        <label asp-for="Type"></label>
+        <select asp-for="Type" asp-items="@Model.CheeseTypes"></select>
+        <span asp-validation-for="Type"></span>
+    </div>
+
     <input type="submit" value="Edit Cheese" />
     
 </form>
