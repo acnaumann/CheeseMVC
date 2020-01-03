@@ -91,14 +91,21 @@ namespace CheeseMVC.Controllers
 
         //POST /Cheese/Edit
         [HttpPost]
-        public IActionResult Edit(int id, string name, string description, CheeseType type)
+        public IActionResult Edit(AddEditCheeseViewModel vm)
         {
-            Cheese ch = CheeseData.GetById(id);
-            ch.Name = name;
-            ch.Description = description;
-            ch.Type = type;
+            if (ModelState.IsValid)
+            {
+                Cheese ch = CheeseData.GetById(vm.CheeseId);
+                ch.Name = vm.Name;
+                ch.Description = vm.Description;
+                ch.Type = vm.Type;
+
+                return Redirect("/Cheese");
+            }
+
+            return View(vm);
             
-            return Redirect("/Cheese");
+            
             
         }
 
