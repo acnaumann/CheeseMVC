@@ -8,20 +8,9 @@ namespace CheeseMVC.Models
         public string Description { get; set; }
         public CheeseType Type { get; set; }
         public int Rating { get; set; }
+        public int ID { get; set; }
 
 
-        public int CheeseId { get; set; }
-        private static int nextId = 1;
 
-        
-
-
-        //add a default constructor - has no properties, no
-        public Cheese()
-        {
-            CheeseId = nextId;
-            nextId++;
-        }
-        
     }
 }
