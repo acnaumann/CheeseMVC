@@ -34,7 +34,7 @@ namespace CheeseMVC.Controllers
 
         {
             ViewBag.title = "Remove Cheeses";
-            ViewBag.cheeses = CheeseData.GetAll();
+            ViewBag.cheeses = context.Cheeses.ToList();
             return View();
         }
 
@@ -48,8 +48,11 @@ namespace CheeseMVC.Controllers
             //Cheeses.SingleOrDefault(x => x.Name == cheese);
             foreach (int cheeseId in cheeseIds)
             {
-                CheeseData.Remove(cheeseId);
+                Cheese theCheese = context.Cheeses.Single(c => c.ID == cheeseId);
+                context.Cheeses.Remove(theCheese);
             }
+
+            context.SaveChanges();
 
             return Redirect("/");  //this was redirected to "/Cheese", but because we
                                    //went into the startup.cs file and changed the controller to cheese
@@ -69,7 +72,11 @@ namespace CheeseMVC.Controllers
             {
                 Cheese newCheese = addCheeseViewModel.CreateCheese();
 
+                //context.Cheeses.Add(newCheese);
+                //context.SaveChanges();
+
                 context.Cheeses.Add(newCheese);
+                context.SaveChanges();
 
                 return Redirect("/Cheese");
             }
@@ -81,7 +88,7 @@ namespace CheeseMVC.Controllers
         //GET /Cheese/Edit?cheeseId=#
         public IActionResult Edit(int cheeseId)
         {
-            Cheese ch = CheeseData.GetById(cheeseId);
+            Cheese ch = context.Cheeses.Single(c => c.ID == cheeseId);
             
 
             AddEditCheeseViewModel vm = new AddEditCheeseViewModel(ch);
@@ -96,11 +103,14 @@ namespace CheeseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                Cheese ch = CheeseData.GetById(vm.CheeseId);
+                Cheese ch = context.Cheeses.Single(c => c.ID == vm.CheeseId);
                 ch.Name = vm.Name;
                 ch.Description = vm.Description;
                 ch.Type = vm.Type;
                 ch.Rating = vm.Rating;
+
+                context.SaveChanges();
+
             }
            
             

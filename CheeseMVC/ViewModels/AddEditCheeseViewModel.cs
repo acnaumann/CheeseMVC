@@ -22,7 +22,7 @@ namespace CheeseMVC.ViewModels
         public AddEditCheeseViewModel(Cheese ch)
         {
             //Use Cheese object to initialize the ViewModel properties
-            CheeseId = ch.CheeseId;
+            CheeseId = ch.ID;
             Name = ch.Name;
             Description = ch.Description;
             Type = ch.Type;
