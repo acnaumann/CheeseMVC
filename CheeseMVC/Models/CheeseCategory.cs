@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CheeseMVC.Models
 {
@@ -14,7 +15,11 @@ namespace CheeseMVC.Models
         }
 
         
+        IList<Cheese> Cheeses { get; set; }
 
-       
+        //public static implicit operator CheeseCategory(List<SelectListItem> v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

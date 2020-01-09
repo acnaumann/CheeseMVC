@@ -19,13 +19,13 @@ namespace CheeseMVC.ViewModels
         //knowing i would have to do something similar to this in the
         //constructor it makes sense to create another constructor here
 
-        public AddEditCheeseViewModel(Cheese ch)
+        public AddEditCheeseViewModel(Cheese ch, IEnumerable<CheeseCategory> categories) : base(categories)
         {
             //Use Cheese object to initialize the ViewModel properties
             CheeseId = ch.ID;
             Name = ch.Name;
             Description = ch.Description;
-            Type = ch.Type;
+            CategoryID = ch.CategoryID;
             Rating = ch.Rating;
         }
     }

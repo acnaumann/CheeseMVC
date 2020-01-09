@@ -15,9 +15,9 @@
         <span asp-validation-for="Description"></span>
     </div>
     <div>
-        <label asp-for="Type"></label>
-        <select asp-for="Type" asp-items="@Model.CheeseTypes"></select>
-        <span asp-validation-for="Type"></span>
+        <label asp-for="CategoryID"></label>
+        <select asp-for="CategoryID" asp-items="@Model.Categories"></select>
+        @*<span asp-validation-for="CategoryID"></span>*@
     </div>
    <div>
         <label asp-for="Rating"></label> 

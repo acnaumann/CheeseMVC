@@ -16,39 +16,55 @@ namespace CheeseMVC.ViewModels
         [Display(Name = "Cheese Description")]
         public string Description { get; set; }
 
-        public CheeseType Type { get; set; }
+        [Required]
+        [Display(Name = "Category")]
+        public int CategoryID { get; set; }
 
-        public List<SelectListItem> CheeseTypes { get; set; }
+        public List<SelectListItem> Categories { get; set; }
+
 
         [Range(1,5)]
         public int Rating { get; set; }
 
 
+        public AddCheeseViewModel(IEnumerable<CheeseCategory> categories)
+        {
+            Categories = new List<SelectListItem>();
+
+            foreach (CheeseCategory category in categories)
+            {
+                Categories.Add(new SelectListItem
+                {
+                    Value = category.ID.ToString(),
+                    Text = category.Name
+                });
+            }
+
+            //// <option value="">Hard</option>   --  HTML you want generated
+            //Categories.Add(new SelectListItem
+            //{
+            //    Value = ((int) CheeseType.Hard).ToString(),
+            //    Text = CheeseType.Hard.ToString()
+            //});
+
+            //CheeseTypes.Add(new SelectListItem
+            //{
+            //    Value = ((int)CheeseType.Fake).ToString(),
+            //    Text = CheeseType.Fake.ToString()
+            //});
+
+            //CheeseTypes.Add(new SelectListItem
+            //{
+            //    Value = ((int)CheeseType.Soft).ToString(),
+            //    Text = CheeseType.Soft.ToString()
+            //});
+
+            ////How would you loop through a set of enums??
+        }
+
         public AddCheeseViewModel()
         {
-            CheeseTypes = new List<SelectListItem>();
 
-
-            // <option value="">Hard</option>   --  HTML you want generated
-            CheeseTypes.Add(new SelectListItem
-            {
-                Value = ((int) CheeseType.Hard).ToString(),
-                Text = CheeseType.Hard.ToString()
-            });
-
-            CheeseTypes.Add(new SelectListItem
-            {
-                Value = ((int)CheeseType.Fake).ToString(),
-                Text = CheeseType.Fake.ToString()
-            });
-
-            CheeseTypes.Add(new SelectListItem
-            {
-                Value = ((int)CheeseType.Soft).ToString(),
-                Text = CheeseType.Soft.ToString()
-            });
-
-            //How would you loop through a set of enums??
         }
 
         public Cheese CreateCheese()
@@ -57,7 +73,7 @@ namespace CheeseMVC.ViewModels
             {
                 Name = this.Name,
                 Description = this.Description,
-                Type = this.Type,
+                CategoryID = this.CategoryID,
                 Rating = this.Rating
             };
             
