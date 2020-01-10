@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace CheeseMVC.Models
 {
     public class Cheese
@@ -13,5 +15,9 @@ namespace CheeseMVC.Models
         public CheeseCategory Category { get; set; }
         public int CategoryID { get; set; }
 
+        public IList<CheeseMenu> CheeseMenus { get; set; }
+
+
+        //should I have a default contructor here??
     }
 }

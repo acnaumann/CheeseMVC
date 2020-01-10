@@ -17,6 +17,15 @@ namespace CheeseMVC.Models
         
         IList<Cheese> Cheeses { get; set; }
 
+
+
+
+
+
+
+
+        //this autopopulated at some point. Don't know why
+
         //public static implicit operator CheeseCategory(List<SelectListItem> v)
         //{
         //    throw new NotImplementedException();
