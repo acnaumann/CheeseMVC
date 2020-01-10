@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CheeseMVC.Migrations
 {
     [DbContext(typeof(CheeseDbContext))]
-    [Migration("20200109182016_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200110214837_AddMenu")]
+    partial class AddMenu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,11 +56,55 @@ namespace CheeseMVC.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("CheeseMVC.Models.CheeseMenu", b =>
+                {
+                    b.Property<int>("CheeseID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MenuID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CheeseID", "MenuID");
+
+                    b.HasIndex("MenuID");
+
+                    b.ToTable("CheeseMenus");
+                });
+
+            modelBuilder.Entity("CheeseMVC.Models.Menu", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Menus");
+                });
+
             modelBuilder.Entity("CheeseMVC.Models.Cheese", b =>
                 {
                     b.HasOne("CheeseMVC.Models.CheeseCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CheeseMVC.Models.CheeseMenu", b =>
+                {
+                    b.HasOne("CheeseMVC.Models.Cheese", "Cheese")
+                        .WithMany("CheeseMenus")
+                        .HasForeignKey("CheeseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CheeseMVC.Models.Menu", "Menu")
+                        .WithMany()
+                        .HasForeignKey("MenuID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

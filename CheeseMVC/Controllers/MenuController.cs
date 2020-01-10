@@ -75,7 +75,7 @@ namespace CheeseMVC.Controllers
                 Items = items
             };
 
-            return View();
+            return View(vm);
         }
 
         public IActionResult AddItem(int id)
