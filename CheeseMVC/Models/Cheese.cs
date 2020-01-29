@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CheeseMVC.Models
 {
-    public class Cheese
+    public class Cheese : Document
     {
 
         public string Name { get; set; }
